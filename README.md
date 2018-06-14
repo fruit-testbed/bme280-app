@@ -25,9 +25,8 @@ To **run through fruit-cli**:
 
 ```shell
 fruit-cli run-container --node mynode -p 8000:80 \
-    -k i2c-dev -d i2c_arm=on --device /dev/i2c-1 \
-    bme280 \
-    herry13/fruit-bme280
+    --kernel-module i2c-dev --device-tree i2c_arm=on --device /dev/i2c-1 \
+    bme280 herry13/fruit-bme280
 ```
 
 To deploy the container, _fruit-cli_ is using [fruit-agent](https://github.com/fruit-testbed/fruit-agent),
