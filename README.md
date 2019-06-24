@@ -2,7 +2,7 @@ Fruit Application for BME280
 ============================
 
 This FruitOS application reads a BME280 environment sensor through I2C,
-and returns the sensor data in JSON as a response of HTTP GET request.
+and publishes the sensor data via Syndicate.
 
 Requirements
 - Raspberry Pi 1, 2 or 3
@@ -10,23 +10,30 @@ Requirements
 - [FruitOS](https://github.com/fruit-testbed/fruitos)
 - (optional) [fruit-cli](https://github.com/fruit-testbed/fruit-cli)
 
+You will also need to configure Syndicate on your node(s). This is not
+yet automated.
 
 To **run through console**:
 
 ```shell
-docker run --device /dev/i2c-1 -p 8000:80 -ti herry13/fruit-bme280
+docker run --device /dev/i2c-1 -ti leastfixedpoint/fruit-syndicate-bme280
 ```
 
-The above assumes that the I2C device-tree and kernel module have been loaded,
-and the BME280 sensor is connected to I2C port 1 (0x76).
+The above assumes that the I2C device-tree and kernel module have been
+loaded, and the BME280 sensor is connected to I2C port 1 (0x76). It
+also assumes a Syndicate broker listening for WebSocket connections on
+port 8000 on the node.
 
 
 To **run through fruit-cli**:
 
 ```shell
-fruit-cli run-container --node mynode -p 8000:80 \
-    --kernel-module i2c-dev --device-tree i2c_arm=on --device /dev/i2c-1 \
-    bme280 herry13/fruit-bme280
+fruit-cli container --filter /monitor/os/hostname = '"MYNODEHOSTNAME"' run \
+  --kernel-module i2c-dev \
+  --device-tree i2c_arm=on \
+  --device /dev/i2c-1 \
+  --name bme280-syndicate \
+  leastfixedpoint/fruit-syndicate-bme280
 ```
 
 To deploy the container, _fruit-cli_ is using [fruit-agent](https://github.com/fruit-testbed/fruit-agent),
