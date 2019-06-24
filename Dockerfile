@@ -1,10 +1,11 @@
-FROM arm32v6/alpine
-MAINTAINER Herry <herry13@gmail.com>
+FROM alpine:latest
+MAINTAINER Tony Garnock-Jones <tonyg@leastfixedpoint.com>
 
-RUN apk --no-cache --no-progress upgrade
-RUN apk --no-cache --no-progress add python py-pip
-RUN pip install RPi.bme280
+RUN \
+    apk --no-cache --no-progress upgrade && \
+    apk --no-cache --no-progress add python3 py3-pip && \
+    pip3 install RPi.bme280 mini-syndicate
 
-COPY bme280-http.py /
+COPY *.py /
 
-ENTRYPOINT ["/usr/bin/python", "/bme280-http.py"]
+ENTRYPOINT ["/usr/bin/python3", "/bme280-http.py"]
