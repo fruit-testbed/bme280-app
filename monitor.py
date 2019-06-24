@@ -4,7 +4,7 @@ import syndicate.mini.core as S
 
 _ = S.Discard()
 
-BME280 = S.Record.makeConstructor('BME280', 'id timestamp temperature pressure humidity')
+BME280 = S.Record.makeConstructor('BME280', 'host timestamp temperature pressure humidity')
 
 def add_stat(t, s): print('+ %r', s)
 def del_stat(t, s): print('- %r', s)
