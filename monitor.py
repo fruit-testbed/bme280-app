@@ -6,9 +6,6 @@ _ = S.Discard()
 
 BME280 = S.Record.makeConstructor('BME280', 'host timestamp temperature pressure humidity')
 
-def add_stat(t, s): print('+ %r', s)
-def del_stat(t, s): print('- %r', s)
-
 argv = sys.argv
 conn = S.Connection.from_url(argv[1] if len(argv) == 2 else 'unix:/var/run/syndicate.sock#test')
 
