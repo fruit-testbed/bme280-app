@@ -11,9 +11,9 @@
     "webpack-cli": "^3.3.5"
   },
   "dependencies": {
-    "@syndicate-lang/core": "^0.2.9",
-    "@syndicate-lang/driver-browser-ui": "^0.2.11",
-    "@syndicate-lang/server": "^0.2.13"
+    "@syndicate-lang/core": "^0.3.0",
+    "@syndicate-lang/driver-browser-ui": "^0.3.0",
+    "@syndicate-lang/server": "^0.3.0"
   },
   "scripts": {
     "build": "./node_modules/.bin/syndicate-babel src --out-dir lib && (npx webpack --silent; true)"
